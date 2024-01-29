@@ -1,2 +1,4 @@
-package com.GestionReviews.GestionReviews.model.dto;public class UserDTO {
+package com.GestionReviews.GestionReviews.model.dto;
+
+public class UserDTO {
 }

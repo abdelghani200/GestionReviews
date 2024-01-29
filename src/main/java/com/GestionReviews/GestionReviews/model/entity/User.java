@@ -1,2 +1,4 @@
-package com.GestionReviews.GestionReviews.model.entity;public class user {
+package com.GestionReviews.GestionReviews.model.entity;
+
+public class User {
 }
