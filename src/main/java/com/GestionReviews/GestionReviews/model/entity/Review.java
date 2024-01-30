@@ -8,13 +8,13 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "roles")
+@Table(name = "reviews")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Review {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reviewId;
 
     @Column(name = "date", nullable = false, length = 50)
