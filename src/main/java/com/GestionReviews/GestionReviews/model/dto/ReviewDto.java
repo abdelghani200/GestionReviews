@@ -1,20 +1,15 @@
-package com.GestionReviews.GestionReviews.model.entity;
+package com.GestionReviews.GestionReviews.model.dto;
 
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
+import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "reviews")
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class Review {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ReviewDto {
     private Long reviewId;
 
     @Column(name = "date", nullable = false, length = 50)
@@ -28,5 +23,4 @@ public class Review {
 
     @Column(name = "reaction", nullable = false, length = 50)
     private String reaction;
-
 }

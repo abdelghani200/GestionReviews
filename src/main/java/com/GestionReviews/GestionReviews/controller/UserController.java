@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
+
 @Controller
 public class UserController {
 
@@ -41,6 +42,7 @@ public class UserController {
         List<UserDTO> users = userService.getAllUsers();
         model.addAttribute("users", users);
         return "users";
-    }
 
+
+    }
 }
