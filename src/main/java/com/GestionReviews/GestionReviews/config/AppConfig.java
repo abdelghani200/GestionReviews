@@ -1,2 +1,4 @@
-package com.GestionReviews.GestionReviews.config;public class AppConfig {
+package com.GestionReviews.GestionReviews.config;
+
+public class AppConfig {
 }
