@@ -3,7 +3,7 @@ package com.GestionReviews.GestionReviews.service.impl;
 import com.GestionReviews.GestionReviews.model.dto.UserDTO;
 import com.GestionReviews.GestionReviews.model.entity.User;
 import com.GestionReviews.GestionReviews.repository.UserRepository;
-import com.GestionReviews.GestionReviews.service.UserService;
+import com.GestionReviews.GestionReviews.service.interfaces.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;

@@ -1,5 +1,6 @@
 package com.GestionReviews.GestionReviews.model.entity;
 
+import com.GestionReviews.GestionReviews.model.enumeration.ReactionType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,7 +27,8 @@ public class Review {
     @Column(name = "message", nullable = false, length = 50)
     private String message;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "reaction", nullable = false, length = 50)
-    private String reaction;
+    private ReactionType reaction;
 
 }

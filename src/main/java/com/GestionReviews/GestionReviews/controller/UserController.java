@@ -1,7 +1,7 @@
 package com.GestionReviews.GestionReviews.controller;
 
 import com.GestionReviews.GestionReviews.model.dto.UserDTO;
-import com.GestionReviews.GestionReviews.service.UserService;
+import com.GestionReviews.GestionReviews.service.interfaces.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

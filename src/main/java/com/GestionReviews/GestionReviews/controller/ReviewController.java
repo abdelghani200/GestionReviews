@@ -13,7 +13,7 @@ public class ReviewController {
         this.reviewService = reviewService;
     }
 
-    @GetMapping("/")
+    @GetMapping("/reviews")
     public String ViewUsersPage(Model model){
         model.addAttribute("listReviews", reviewService.getAll());
         return "reviews";
