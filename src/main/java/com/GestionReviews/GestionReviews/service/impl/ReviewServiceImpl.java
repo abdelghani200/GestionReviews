@@ -2,6 +2,7 @@ package com.GestionReviews.GestionReviews.service.impl;
 
 import com.GestionReviews.GestionReviews.model.dto.ReviewDto;
 import com.GestionReviews.GestionReviews.model.entity.Review;
+import com.GestionReviews.GestionReviews.model.dto.respDto.ReviewRespDto;
 import com.GestionReviews.GestionReviews.repository.ReviewRepository;
 import com.GestionReviews.GestionReviews.service.interfaces.ReviewService;
 import org.modelmapper.ModelMapper;
@@ -29,10 +30,10 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public List<ReviewDto> getAll() {
+    public List<ReviewRespDto> getAll() {
         List<Review> reviewList = reviewRepository.findAll();
         return reviewList.stream()
-                .map(review -> modelMapper.map(review, ReviewDto.class))
+                .map(review -> modelMapper.map(review, ReviewRespDto.class))
                 .collect(Collectors.toList());
     }
 }
