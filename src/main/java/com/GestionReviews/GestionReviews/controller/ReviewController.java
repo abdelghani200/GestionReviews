@@ -26,7 +26,7 @@ public class ReviewController {
         model.addAttribute("reviewDto", new ReviewDto()); // Add this line
         return "index";
     }
-    @PostMapping("/submit-review")
+    @PostMapping("/")
     public String submitReview(@ModelAttribute ReviewDto reviewDto) {
         reviewDto.setUserId(1L);
         reviewDto.setReaction("LIKE");
