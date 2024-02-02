@@ -8,4 +8,6 @@ import java.util.List;
 public interface ReviewService {
     ReviewDto save(ReviewDto reviewDto);
     List<ReviewRespDto> getAll();
+    ReviewDto update(Long reviewId, ReviewDto reviewDto);
+
 }

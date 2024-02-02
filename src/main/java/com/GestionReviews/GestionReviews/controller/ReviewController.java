@@ -4,6 +4,7 @@ import com.GestionReviews.GestionReviews.model.dto.ReviewDto;
 import com.GestionReviews.GestionReviews.model.entity.User;
 import com.GestionReviews.GestionReviews.repository.UserRepository;
 import com.GestionReviews.GestionReviews.service.interfaces.ReviewService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -33,10 +34,13 @@ public class ReviewController {
         if (authentication != null && authentication.isAuthenticated()) {
             String username = authentication.getName();
             model.addAttribute("username", username);
+            String loggedInUsername = authentication.getName();
+            model.addAttribute("loggedInUsername", loggedInUsername);
 
             Long userId = getUserIdByUsername(username);
             model.addAttribute("userId", userId);
         }
+
 
         model.addAttribute("reviewDto", new ReviewDto());
 
@@ -57,5 +61,11 @@ public class ReviewController {
 
         reviewService.save(reviewDto);
         return "redirect:/";
+    }
+    @GetMapping("/admin")
+    @PreAuthorize("hasRole('ADMIN')")
+    public String adminIndexPage(Model model){
+        model.addAttribute("listReviews", reviewService.getAll());
+        return "admin/indx";
     }
 }

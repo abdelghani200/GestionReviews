@@ -36,4 +36,18 @@ public class ReviewServiceImpl implements ReviewService {
                 .map(review -> modelMapper.map(review, ReviewRespDto.class))
                 .collect(Collectors.toList());
     }
+
+
+    @Override
+    public ReviewDto update(Long reviewId, ReviewDto reviewDto) {
+        Review existingReview = reviewRepository.findById(reviewId).orElseThrow(() -> new RuntimeException("Review not found"));
+
+        existingReview.setTitle(reviewDto.getTitle());
+        existingReview.setMessage(reviewDto.getMessage());
+        existingReview.setDate(reviewDto.getDate());
+
+        Review updatedReview = reviewRepository.save(existingReview);
+
+        return modelMapper.map(updatedReview, ReviewDto.class);
+    }
 }

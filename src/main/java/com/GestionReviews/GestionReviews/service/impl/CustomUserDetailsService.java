@@ -2,6 +2,7 @@ package com.GestionReviews.GestionReviews.service.impl;
 
 import com.GestionReviews.GestionReviews.model.entity.User;
 import com.GestionReviews.GestionReviews.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -25,13 +26,6 @@ public class CustomUserDetailsService implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException("User not found with username: " + username);
         }
-
-        String role = "ROLE_" + user.getRole();
-
-        return new org.springframework.security.core.userdetails.User(
-                user.getUsername(),
-                user.getPassword(),
-                List.of(new SimpleGrantedAuthority(role))
-        );
+        return user;
     }
 }
