@@ -1,10 +1,13 @@
 package com.GestionReviews.GestionReviews.model.entity;
 
+import com.GestionReviews.GestionReviews.model.enumeration.RoleType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 
 @Entity
@@ -24,4 +27,13 @@ public class User {
     @NotBlank(message = "Password is required")
     @Column(name = "password", nullable = false, length = 1000)
     private String password;
+
+    @NotNull(message = "Role is required")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role", nullable = false, length = 25)
+    private RoleType role;
+
+    @OneToMany(mappedBy = "user")
+    private List<Review> reviews;
+
 }
