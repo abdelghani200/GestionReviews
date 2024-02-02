@@ -2,6 +2,8 @@ package com.GestionReviews.GestionReviews.model.entity;
 
 import com.GestionReviews.GestionReviews.model.enumeration.ReactionType;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,17 +20,29 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reviewId;
 
-    @Column(name = "date", nullable = false, length = 50)
+    @NotNull(message = "Date is required")
+    @Column(name = "date", nullable = false, length = 250)
     private LocalDate date;
 
-    @Column(name = "title", nullable = false, length = 50)
+    @NotBlank(message = "Title is required")
+    @Column(name = "title", nullable = false, length = 250)
     private String title;
 
-    @Column(name = "message", nullable = false, length = 50)
+    @NotBlank(message = "Message is required")
+    @Column(name = "message", nullable = false, length = 400)
     private String message;
 
+    @NotNull(message = "Reaction is required")
     @Enumerated(EnumType.STRING)
-    @Column(name = "reaction", nullable = false, length = 50)
+    @Column(name = "reaction", nullable = false, length = 25)
     private ReactionType reaction;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+
+
+
 
 }

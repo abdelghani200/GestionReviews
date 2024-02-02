@@ -4,23 +4,32 @@ import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class ReviewDto {
     private Long reviewId;
 
-    @Column(name = "date", nullable = false, length = 50)
+    @NotNull(message = "Date is required")
     private LocalDate date;
 
-    @Column(name = "title", nullable = false, length = 50)
+    @NotBlank(message = "Title is required")
     private String title;
 
-    @Column(name = "message", nullable = false, length = 50)
+    @NotBlank(message = "Message is required")
     private String message;
 
-    @Column(name = "reaction", nullable = false, length = 50)
+    @NotNull(message = "Reaction is required")
     private String reaction;
+
+    @NotNull(message = "User is required")
+    private Long userId;
 }
