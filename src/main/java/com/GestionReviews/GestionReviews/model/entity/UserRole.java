@@ -1,5 +1,5 @@
 package com.GestionReviews.GestionReviews.model.entity;
-
+/*
 import com.GestionReviews.GestionReviews.model.identity.UserRoleIdentity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -25,3 +25,6 @@ public class UserRole {
     @JoinColumn(name = "role_id")
     private Role role;
 }
+
+
+ */

@@ -1,6 +1,5 @@
 package com.GestionReviews.GestionReviews.model.identity;
 
-import com.GestionReviews.GestionReviews.model.entity.Role;
 import com.GestionReviews.GestionReviews.model.entity.User;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;
@@ -11,6 +10,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
+/*
 @Embeddable
 @Data
 @AllArgsConstructor
@@ -25,3 +25,6 @@ public class UserRoleIdentity implements Serializable {
     @JoinColumn(name = "role_id")
     private Role role;
 }
+
+
+ */
