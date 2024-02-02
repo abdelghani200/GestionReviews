@@ -21,7 +21,8 @@ public class SecurityConfig {
                     .requestMatchers("/css/**").permitAll()
                     .requestMatchers("/admins/**", "/users/**").hasRole("ADMIN")
                     .requestMatchers("/reviews/report").hasAuthority("MODERATOR")
-                    .requestMatchers("/", "/reviews/**").authenticated();
+                    .requestMatchers("/", "/reviews/**").authenticated()
+                    .requestMatchers("createUser").permitAll();
         });
 
         http.formLogin(formLogin -> formLogin
