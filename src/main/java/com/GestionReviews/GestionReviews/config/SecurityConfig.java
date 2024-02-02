@@ -2,7 +2,6 @@ package com.GestionReviews.GestionReviews.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -13,8 +12,6 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 @Configuration
 
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
-
 public class SecurityConfig {
 
     @Bean
@@ -22,9 +19,11 @@ public class SecurityConfig {
         http.authorizeHttpRequests(authorizeRequests -> {
             authorizeRequests
                     .requestMatchers("/css/**").permitAll()
+                    .requestMatchers("/admins/**", "/users/**").hasRole("ADMIN")
+                    .requestMatchers("/reviews/report").hasAuthority("MODERATOR")
                     .requestMatchers("/", "/reviews/**").authenticated()
-                    .requestMatchers("/admin").hasRole("ADMIN")
-                    .requestMatchers("createUser").permitAll();
+                    .requestMatchers("createUser").permitAll()
+                    .requestMatchers("/index").hasRole("ADMIN");
         });
 
         http.formLogin(formLogin -> formLogin

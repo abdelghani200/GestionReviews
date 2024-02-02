@@ -1,5 +1,6 @@
 package com.GestionReviews.GestionReviews.service.impl;
 
+import com.GestionReviews.GestionReviews.exception.ReviewException;
 import com.GestionReviews.GestionReviews.model.dto.ReviewDto;
 import com.GestionReviews.GestionReviews.model.entity.Review;
 import com.GestionReviews.GestionReviews.model.dto.respDto.ReviewRespDto;
@@ -9,6 +10,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -50,4 +52,33 @@ public class ReviewServiceImpl implements ReviewService {
 
         return modelMapper.map(updatedReview, ReviewDto.class);
     }
+
+    @Override
+    public void deleteReview(Long id) {
+        reviewRepository.deleteById(id);
+    }
+
+    @Override
+    public ReviewDto updateReview(ReviewDto reviewDto, Long id) {
+        Optional<Review> existingLevelOptional = reviewRepository.findById(id);
+        if (existingLevelOptional.isEmpty()) {
+            throw new ReviewException("Review not found with ID: " + id);
+        }
+
+        Review existingReview = existingLevelOptional.get();
+        modelMapper.map(reviewDto, existingReview);
+        Review updatedLevel = reviewRepository.save(existingReview);
+        return modelMapper.map(updatedLevel, ReviewDto.class);
+    }
+
+    @Override
+    public ReviewDto getReviewById(Long id) {
+        Optional<Review> reviewOptional = reviewRepository.findById(id);
+        if (reviewOptional.isPresent()) {
+            return modelMapper.map(reviewOptional.get(), ReviewDto.class);
+        } else {
+            throw new ReviewException("Review not found with ID: " + id);
+        }
+    }
+
 }
