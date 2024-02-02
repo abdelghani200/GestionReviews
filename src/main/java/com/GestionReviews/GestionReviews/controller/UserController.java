@@ -24,17 +24,17 @@ public class UserController {
         this.modelMapper = modelMapper;
     }
 
-    @GetMapping("/create")
+    @GetMapping("/createUser")
     public String showRegistrationForm(Model model) {
         model.addAttribute("user", new UserDTO());
         return "createUser";
     }
 
 
-    @PostMapping("/create")
+    @PostMapping("/createUser")
     public String processRegistration(UserDTO userDTO, Model model) {
         userService.create(userDTO);
-        return "redirect:/users";
+        return "redirect:/login";
     }
 
     @GetMapping("/users")
