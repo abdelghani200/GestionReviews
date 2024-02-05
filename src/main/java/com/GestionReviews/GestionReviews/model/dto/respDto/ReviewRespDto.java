@@ -13,14 +13,10 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class ReviewRespDto {
     private Long reviewId;
-
     private LocalDate date;
-
     private String title;
-
     private String message;
-
     private String reaction;
-
+    private Boolean signalee;
     private UserDTO user;
 }

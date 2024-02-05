@@ -19,6 +19,7 @@ public class ReviewResp {
     private String message;
     @NotNull(message = "Reaction is required")
     private String reaction;
+    private Boolean signalee;
     @NotNull(message = "User is required")
     private UserDTO user;
 }

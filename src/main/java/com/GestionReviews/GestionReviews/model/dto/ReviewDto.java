@@ -26,6 +26,8 @@ public class ReviewDto {
     @NotNull(message = "Reaction is required")
     private String reaction;
 
+    private Boolean signalee;
+
     @NotNull(message = "User is required")
     private Long userId;
 }

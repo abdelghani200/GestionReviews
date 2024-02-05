@@ -81,4 +81,11 @@ public class ReviewServiceImpl implements ReviewService {
         }
     }
 
+    @Override
+    public void signalerReview(Long id) {
+        Review review = reviewRepository.findById(id).orElseThrow(() -> new ReviewException("not found !!"));
+        review.setSignalee(true);
+        reviewRepository.save(review);
+    }
+
 }

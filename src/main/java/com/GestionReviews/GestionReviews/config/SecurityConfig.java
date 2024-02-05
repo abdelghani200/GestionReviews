@@ -22,14 +22,22 @@ public class SecurityConfig {
                     .requestMatchers("/admins/**", "/users/**").hasRole("ADMIN")
                     .requestMatchers("/reviews/report").hasAuthority("MODERATOR")
                     .requestMatchers("/", "/reviews/**").authenticated()
+                    .requestMatchers("/redirectByRole").authenticated()
                     .requestMatchers("createUser").permitAll()
-                    .requestMatchers("/index").hasRole("ADMIN");
+                    .requestMatchers("/index").hasRole("ADMIN")
+                    .requestMatchers("/edit/**").hasRole("ADMIN")
+                    .requestMatchers("/delete/**").hasRole("ADMIN")
+                    .requestMatchers("/moderateur/signaler/**").hasRole("MODERATOR")
+                    .requestMatchers("/moderateur/edit/**").hasRole("MODERATOR")
+                    .requestMatchers("/moderateur/delete/**").hasRole("MODERATOR")
+                    .requestMatchers("/moderateur/index").hasRole("MODERATOR");
+
         });
 
         http.formLogin(formLogin -> formLogin
                 .loginPage("/login")
                 .permitAll()
-                .defaultSuccessUrl("/", true)
+                .defaultSuccessUrl("/redirectByRole", true)
                 .failureUrl("/login?error=true"));
 
         http.logout(logout -> logout
