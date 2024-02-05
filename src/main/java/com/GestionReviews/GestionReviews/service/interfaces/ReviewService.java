@@ -14,4 +14,6 @@ public interface ReviewService {
     ReviewDto update(Long reviewId, ReviewDto reviewDto);
 
     void signalerReview(Long id);
+    ReviewDto signalReview(Long reviewId);
+
 }

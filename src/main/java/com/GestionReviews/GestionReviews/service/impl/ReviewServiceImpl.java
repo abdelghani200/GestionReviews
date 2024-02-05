@@ -87,5 +87,11 @@ public class ReviewServiceImpl implements ReviewService {
         review.setSignalee(true);
         reviewRepository.save(review);
     }
+    @Override
+    public ReviewDto signalReview(Long reviewId) {
+        ReviewDto reviewDto = getReviewById(reviewId);
+        reviewDto.setSignalee(true);
+        return updateReview(reviewDto, reviewId);
+    }
 
 }

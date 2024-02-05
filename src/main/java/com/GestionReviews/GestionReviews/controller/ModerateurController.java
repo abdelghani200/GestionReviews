@@ -23,6 +23,13 @@ public class ModerateurController {
         model.addAttribute("reviews", reviewService.getAll());
         return "moderateur/index";
     }
+    @GetMapping("/moderateur/signaler/{reviewId}")
+    public String signalerReviewForm(@PathVariable Long reviewId, Model model) {
+        ReviewDto reviewDto = reviewService.getReviewById(reviewId);
+        model.addAttribute("review", reviewDto);
+        return "moderateur/signaler";
+    }
+
     @PostMapping("/moderateur/signaler/{reviewId}")
     public String signalerReview(@PathVariable Long reviewId) {
         reviewService.signalerReview(reviewId);
@@ -48,5 +55,6 @@ public class ModerateurController {
         reviewService.deleteReview(id);
         return "redirect:/moderateur/index";
     }
+
 
 }
