@@ -27,7 +27,7 @@ public class ModerateurController {
     public String signalerReviewForm(@PathVariable Long reviewId, Model model) {
         ReviewDto reviewDto = reviewService.getReviewById(reviewId);
         model.addAttribute("review", reviewDto);
-        return "moderateur/signaler";
+        return "moderateur/index";
     }
 
     @PostMapping("/moderateur/signaler/{reviewId}")
