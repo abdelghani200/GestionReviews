@@ -8,6 +8,7 @@ import java.util.List;
 public interface ReviewService {
     ReviewDto save(ReviewDto reviewDto);
     List<ReviewRespDto> getAll();
+
     ReviewDto updateReview(ReviewDto reviewDto, Long id);
     ReviewDto getReviewById(Long id);
     void deleteReview(Long id);
@@ -15,5 +16,7 @@ public interface ReviewService {
 
     void signalerReview(Long id);
     ReviewDto signalReview(Long reviewId);
+    ReviewDto updateReaction(Long reviewId, String reaction);
+
 
 }

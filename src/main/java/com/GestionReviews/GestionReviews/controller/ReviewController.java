@@ -70,6 +70,43 @@ public class ReviewController {
         return "admin/indx";
     }
 
+    @GetMapping("/reviews/{reviewId}/updateReaction")
+    public String updateReactionForm(@PathVariable("reviewId") Long reviewId, Model model) {
+        ReviewDto reviewDto = reviewService.getReviewById(reviewId);
+        model.addAttribute("review", reviewDto);
+        return "/";
+    }
+    /*
+    @PostMapping("/reviews/{reviewId}/updateReaction")
+    public String updateReaction(
+            @PathVariable("reviewId") Long reviewId,
+            @RequestParam("reaction") String reaction,
+            RedirectAttributes redirectAttributes
+    ) {
+        try {
+            ReviewDto updatedReview = reviewService.updateReaction(reviewId, reaction);
+            redirectAttributes.addFlashAttribute("successMessage", "Reaction updated successfully.");
+        } catch (ReviewException e) {
+            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
+        }
+        return "redirect:/";
+    }
+
+     */
+    @PostMapping("/reviews/{reviewId}/updateReaction")
+    public String updateReaction(
+            @PathVariable("reviewId") Long reviewId,
+            @RequestParam("reaction") String reaction,
+            RedirectAttributes redirectAttributes
+    ) {
+        try {
+            reviewService.updateReaction(reviewId, reaction); // Update the reaction
+            redirectAttributes.addFlashAttribute("successMessage", "Reaction updated successfully.");
+        } catch (ReviewException e) {
+            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
+        }
+        return "redirect:/";
+    }
 
 
 }

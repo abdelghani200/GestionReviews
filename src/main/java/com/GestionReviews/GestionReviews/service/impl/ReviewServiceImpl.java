@@ -7,6 +7,7 @@ import com.GestionReviews.GestionReviews.model.dto.respDto.ReviewRespDto;
 import com.GestionReviews.GestionReviews.repository.ReviewRepository;
 import com.GestionReviews.GestionReviews.service.interfaces.ReviewService;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,7 +34,7 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     public List<ReviewRespDto> getAll() {
-        List<Review> reviewList = reviewRepository.findAll();
+        List<Review> reviewList = reviewRepository.findAll(Sort.by(Sort.Direction.ASC, "reviewId"));
         return reviewList.stream()
                 .map(review -> modelMapper.map(review, ReviewRespDto.class))
                 .collect(Collectors.toList());
@@ -91,6 +92,15 @@ public class ReviewServiceImpl implements ReviewService {
     public ReviewDto signalReview(Long reviewId) {
         ReviewDto reviewDto = getReviewById(reviewId);
         reviewDto.setSignalee(true);
+        return updateReview(reviewDto, reviewId);
+    }
+
+    @Override
+    public ReviewDto updateReaction(Long reviewId, String reaction) {
+        ReviewDto reviewDto = getReviewById(reviewId);
+
+        reviewDto.setReaction(reaction);
+
         return updateReview(reviewDto, reviewId);
     }
 
