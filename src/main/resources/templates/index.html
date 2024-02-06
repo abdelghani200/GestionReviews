@@ -21,7 +21,7 @@
                     <h4 class="w-full md:w-auto text-xl font-heading font-medium" th:text="${review.user.username}"></h4>
                     <div class="w-full md:w-px h-2 md:h-8 mx-8 bg-transparent md:bg-gray-200"></div>
                     <span class="mr-4 text-xl font-heading font-medium" th:text="${review.title}"></span>
-                    <div class="inline-flex">
+                    <div class="inline-flex" th:if="${review.user.username == loggedInUsername}">
                         <!-- For Dislike -->
                         <form th:action="@{/reviews/{reviewId}/updateReaction(reviewId=${review.reviewId})}" method="post" th:if="${review.reaction == 'DISLIKE'}">
                             <input type="hidden" name="reaction" value="LIKE">
