@@ -9,7 +9,7 @@
 <body>
 <div th:include="navbar :: navbar"></div>
 
-<table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
+<table class="w-4/5 mx-auto mt-16 border-collapse bg-white text-left text-sm text-gray-500">
     <thead class="bg-gray-50">
     <tr>
         <th scope="col" class="px-6 py-4 font-medium text-gray-900 ">Id review</th>
@@ -23,14 +23,14 @@
     </tr>
     </thead>
     <tbody class="divide-y divide-gray-100 border-t border-gray-100">
-    <tr class="hover:bg-gray-50" th:each="review : ${reviews}">
-        <td class="px-6 py-4" th:text="${review.reviewId}"></td>
-        <td class="px-6 py-4" th:text="${review.title}"></td>
-        <td class="px-6 py-4" th:text="${review.message}"></td>
-        <td class="px-6 py-4" th:text="${review.user.username}"></td>
-        <td class="px-6 py-4" th:text="${review.date}"></td>
-        <td class="px-6 py-4" th:text="${review.reaction}"></td>
-        <td class="px-6 py-4">
+    <tr  th:each="review : ${reviews}" th:class="${review.signalee == true} ? 'bg-red-500' : 'hover:bg-gray-50'">
+        <td th:class="${review.signalee == true} ? 'px-6 py-4 text-white' : 'px-6 py-4'" th:text="${review.reviewId}"></td>
+        <td th:class="${review.signalee == true} ? 'px-6 py-4 text-white' : 'px-6 py-4'" th:text="${review.title}"></td>
+        <td th:class="${review.signalee == true} ? 'px-6 py-4 text-white' : 'px-6 py-4'" th:text="${review.message}"></td>
+        <td th:class="${review.signalee == true} ? 'px-6 py-4 text-white' : 'px-6 py-4'" th:text="${review.user.username}"></td>
+        <td th:class="${review.signalee == true} ? 'px-6 py-4 text-white' : 'px-6 py-4'" th:text="${review.date}"></td>
+        <td th:class="${review.signalee == true} ? 'px-6 py-4 text-white' : 'px-6 py-4'" th:text="${review.reaction}"></td>
+        <td th:class="${review.signalee == true} ? 'px-6 py-4 text-white' : 'px-6 py-4'">
 
             <div class="flex justify-center gap-4">
                 <a th:href="@{/delete/{id}(id=${review.reviewId})}" x-data="{ tooltip: 'Delete' }">

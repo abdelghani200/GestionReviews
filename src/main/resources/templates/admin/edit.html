@@ -27,12 +27,23 @@
 
         <div class="mb-4">
             <label for="reaction" class="block text-gray-600 font-bold mb-2">Reaction:</label>
-            <input type="text" id="reaction" name="reaction" th:field="*{review.reaction}" class="w-full border p-2"/>
+            <select name="reaction" id="reaction" th:field="*{review.reaction}" class="w-full border p-2">
+                <option value="LIKE">Like</option>
+                <option value="DISLIKE">Dislike</option>
+            </select>
         </div>
+
 
         <div class="mb-4">
         <label for="date" class="block text-gray-600 font-bold mb-2">Date:</label>
-        <input type="text" id="date" name="date" th:field="*{review.date}" class="w-full border p-2"/>
+        <input type="date" id="date" name="date" th:field="*{review.date}" class="w-full border p-2"/>
+        </div>
+        <div class="mb-4">
+            <label for="signalee" class="block text-gray-600 font-bold mb-2">Signalee:</label>
+            <select name="signalee" id="signalee" th:field="*{review.signalee}" class="w-full border p-2">
+                <option value="true">True</option>
+                <option value="false">False</option>
+            </select>
         </div>
 
         <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Save Changes</button>
