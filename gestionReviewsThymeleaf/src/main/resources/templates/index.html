@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+</head>
+<body>
+<div th:include="navbar :: navbar"></div>
+
+<section class="py-24 2xl:py-44 bg-blueGray-100 rounded-t-10xl overflow-hidden">
+    <div class="container px-4 mx-auto">
+        <span class="text-xs text-gray-300 uppercase tracking-wide">What people say</span>
+        <h1 class="mt-8 mb-14 md:mb-24 text-8xl md:text-10xl xl:text-11xl font-heading font-medium leading-tight">Reviews</h1>
+
+        <div class="mb-2 shadow-lg rounded-t-8xl rounded-b-5xl overflow-hidden mt-16"  th:each="review : ${listReviews}">
+            <div class="pt-3 pb-3 md:pb-1 px-4 md:px-16 bg-white bg-opacity-40">
+                <div class="flex flex-wrap items-center">
+                    <img class="mr-6" src="uinel-assets/images/ecommerce-reviews/user.png" alt="">
+                    <h4 class="w-full md:w-auto text-xl font-heading font-medium" th:text="${review.user.username}"></h4>
+                    <div class="w-full md:w-px h-2 md:h-8 mx-8 bg-transparent md:bg-gray-200"></div>
+                    <span class="mr-4 text-xl font-heading font-medium" th:text="${review.title}"></span>
+                    <div class="inline-flex" th:if="${review.user.username == loggedInUsername}">
+                        <!-- For Dislike -->
+                        <form th:action="@{/reviews/{reviewId}/updateReaction(reviewId=${review.reviewId})}" method="post" th:if="${review.reaction == 'DISLIKE'}">
+                            <input type="hidden" name="reaction" value="LIKE">
+                            <button type="submit">
+                                <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M15.7 4C18.87 4 21 6.98 21 9.76C21 15.39 12.16 20 12 20C11.84 20 3 15.39 3 9.76C3 6.98 5.13 4 8.3 4C10.12 4 11.31 4.91 12 5.71C12.69 4.91 13.88 4 15.7 4Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                            </button>
+                        </form>
+                        <form th:action="@{/reviews/{reviewId}/updateReaction(reviewId=${review.reviewId})}" method="post" th:if="${review.reaction == 'LIKE'}">
+                            <input type="hidden" name="reaction" value="DISLIKE">
+                            <button type="submit">
+                                <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M2 9.1371C2 14 6.01943 16.5914 8.96173 18.9109C10 19.7294 11 20.5 12 20.5C13 20.5 14 19.7294 15.0383 18.9109C17.9806 16.5914 22 14 22 9.1371C22 4.27416 16.4998 0.825464 12 5.50063C7.50016 0.825464 2 4.27416 2 9.1371Z" fill="#000000"></path> </g></svg>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="px-4 overflow-hidden md:px-16 pt-8 pb-12 bg-white">
+                <div class="flex flex-wrap">
+                    <div class="w-full md:w-2/3 mb-6 md:mb-0">
+                        <p class="mb-8 max-w-2xl text-darkBlueGray-400 leading-loose" th:text="${review.message}"></p>
+
+                    </div>
+                    <div class="w-full md:w-1/3 text-right">
+                        <p class="mb-8 text-sm text-gray-300" th:text="${review.date}"></p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-8">
+            <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="w-44 m-auto h-16 block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+                Add Your Reaction
+            </button>
+        </div>
+
+            <!-- Main modal -->
+            <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                <div class="relative p-4 w-full max-w-md max-h-full">
+                    <!-- Modal content -->
+                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                        <!-- Modal header -->
+                        <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                                Create Review
+                            </h3>
+                            <button type="button" class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="authentication-modal">
+                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                </svg>
+                                <span class="sr-only">Close modal</span>
+                            </button>
+                        </div>
+                        <!-- Modal body -->
+                        <div class="p-4 md:p-5">
+                            <form action="#" th:action="@{/}" th:object="${reviewDto}" method="post">
+
+                                <div>
+                                    <label for="title" class="mt-2 block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
+                                    <input type="text" id="title" th:field="*{title}" class="bg-gray-50  border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Your title here" required>
+                                </div>
+                                <div>
+                                    <label for="message" class="mt-2 block mb-2 text-sm font-medium text-gray-900 dark:text-white">Message</label>
+                                    <textarea id="message" th:field="*{message}" rows="4" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Your message here" required></textarea>
+                                </div>
+                                <div>
+                                    <input type="hidden" id="userId" name="userId" th:value="${userId}">
+                                </div>
+                                <button type="submit" class="w-full mt-8 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add Your Reaction</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
+</body>
+</html>

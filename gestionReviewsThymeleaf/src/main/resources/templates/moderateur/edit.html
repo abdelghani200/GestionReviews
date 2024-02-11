@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Review</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body>
+<div th:include="navbar :: navbar"></div>
+
+<div class="container mx-auto mt-8">
+    <h2 class="text-2xl font-bold mb-4">Edit Review</h2>
+
+    <!-- Form for editing review -->
+    <form th:action="@{/moderateur/edit/{id}(id=${review.reviewId})}" method="post" class="max-w-md">
+        <input type="hidden" th:field="*{review.reviewId}"/>
+
+        <div class="mb-4">
+            <label for="title" class="block text-gray-600 font-bold mb-2">Title:</label>
+            <input type="text" id="title" name="title" th:field="*{review.title}" class="w-full border p-2"/>
+        </div>
+
+        <div class="mb-4">
+            <label for="message" class="block text-gray-600 font-bold mb-2">Message:</label>
+            <textarea id="message" name="message" th:field="*{review.message}" class="w-full border p-2"></textarea>
+        </div>
+
+        <div class="mb-4">
+            <label for="reaction" class="block text-gray-600 font-bold mb-2">Reaction:</label>
+            <input type="text" id="reaction" name="reaction" th:field="*{review.reaction}" class="w-full border p-2"/>
+        </div>
+
+        <div class="mb-4">
+            <label for="date" class="block text-gray-600 font-bold mb-2">Date:</label>
+            <input type="text" id="date" name="date" th:field="*{review.date}" class="w-full border p-2"/>
+        </div>
+
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Save Changes</button>
+    </form>
+
+</div>
+
+</body>
+</html>
