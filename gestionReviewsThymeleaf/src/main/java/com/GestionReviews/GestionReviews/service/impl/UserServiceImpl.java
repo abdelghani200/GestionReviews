@@ -6,6 +6,7 @@ import com.GestionReviews.GestionReviews.repository.UserRepository;
 import com.GestionReviews.GestionReviews.service.interfaces.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -42,4 +43,14 @@ public class UserServiceImpl implements UserService {
                 .map(user -> modelMapper.map(user, UserDTO.class))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) {
+        User user = userRepository.findByUsername(username);
+        if (user != null) {
+            return user;
+        }
+        throw new RuntimeException("No user found with provided username");
+    }
+    
 }
